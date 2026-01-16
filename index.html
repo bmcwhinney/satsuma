@@ -51,6 +51,12 @@
     }
     </script>
     
+    <!-- DNS Prefetch for faster mobile loading -->
+    <link rel="dns-prefetch" href="https://elfsightcdn.com">
+    <link rel="dns-prefetch" href="https://static.elfsight.com">
+    <link rel="dns-prefetch" href="https://core.service.elfsight.com">
+    <link rel="dns-prefetch" href="https://apps.elfsight.com">
+    
     <!-- Preconnect to external services -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +65,11 @@
     <link rel="preconnect" href="https://core.service.elfsight.com" crossorigin>
     
     <!-- Preload Elfsight for faster portfolio loading -->
-    <link rel="preload" href="https://elfsightcdn.com/platform.js" as="script">
+    <link rel="preload" href="https://elfsightcdn.com/platform.js" as="script" fetchpriority="high">
+    
+    <!-- Load Elfsight early for mobile performance -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind -->
@@ -364,9 +374,8 @@
                     <h2 class="text-satsuma text-xs font-bold uppercase tracking-widest">Works</h2>
                     <span class="text-xs text-ink/40 font-mono hidden md:block">2023 — 2026</span>
                 </div>
-                <div class="fade-in-up min-h-[800px] w-full">
+                <div class="fade-in-up min-h-[400px] md:min-h-[800px] w-full">
                     <!-- Elfsight Portfolio | Satsuma Studio -->
-                    <script src="https://elfsightcdn.com/platform.js" defer></script>
                     <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe"></div>
                 </div>
             </div>
