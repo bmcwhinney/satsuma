@@ -250,17 +250,13 @@
                 padding-right: 0.25rem !important;
             }
             .section-padding {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
             }
             .email-wrap {
                 white-space: normal !important;
                 word-break: break-all !important;
-                font-size: clamp(1rem, 6vw, 1.5rem) !important;
-            }
-            .hero-text {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
+                font-size: clamp(0.9rem, 5vw, 1.5rem) !important;
             }
         }
 
@@ -269,6 +265,19 @@
             .nav-narrow {
                 gap: 0.5rem !important;
                 font-size: 9px !important;
+            }
+        }
+
+        /* Hero text responsive fixes */
+        @media (max-width: 400px) {
+            .hero-heading {
+                font-size: clamp(1.5rem, 11vw, 2.5rem) !important;
+                word-break: break-word;
+                hyphens: auto;
+            }
+            .hero-subtitle {
+                font-size: 8px !important;
+                letter-spacing: 0.1em !important;
             }
         }
     </style>
@@ -325,13 +334,14 @@
         <section id="hero" class="min-h-[85vh] flex flex-col items-center justify-center relative px-4 sm:px-6 pt-32 overflow-hidden z-10 section-padding">
             <div class="satsuma-orb mb-8 md:mb-12" id="hero-orb"></div>
             
-            <div class="max-w-3xl text-center z-10">
-                <h1 class="font-sans font-light text-fluid-h1 text-ink leading-[1.1] mb-6 md:mb-8 reveal-wrapper">
-                    <span class="reveal-text is-hidden block">Deliberate & Dynamic</span>
+            <div class="max-w-3xl text-center z-10 px-2">
+                <h1 class="font-sans font-light text-fluid-h1 text-ink leading-[1.1] mb-6 md:mb-8 reveal-wrapper hero-heading">
+                    <span class="reveal-text is-hidden block">Deliberate &</span>
+                    <span class="reveal-text is-hidden block" style="transition-delay: 50ms;">Dynamic</span>
                     <span class="reveal-text is-hidden block" style="transition-delay: 100ms;">Design.</span>
                 </h1>
                 
-                <p class="font-mono text-[10px] md:text-sm text-ink/60 max-w-lg mx-auto leading-relaxed reveal-wrapper uppercase tracking-widest">
+                <p class="font-mono text-[10px] md:text-sm text-ink/60 max-w-lg mx-auto leading-relaxed reveal-wrapper uppercase tracking-widest hero-subtitle">
                     <span class="reveal-text is-hidden block" style="transition-delay: 200ms;">
                         Digital Focus • Strategy • Technology
                     </span>
