@@ -51,9 +51,15 @@
     }
     </script>
     
-    <!-- Fonts -->
+    <!-- Preconnect to external services -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://elfsightcdn.com" crossorigin>
+    <link rel="preconnect" href="https://static.elfsight.com" crossorigin>
+    <link rel="preconnect" href="https://core.service.elfsight.com" crossorigin>
+    
+    <!-- Preload Elfsight for faster portfolio loading -->
+    <link rel="preload" href="https://elfsightcdn.com/platform.js" as="script">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind -->
@@ -358,8 +364,8 @@
                 </div>
                 <div class="fade-in-up min-h-[800px] w-full">
                     <!-- Elfsight Portfolio | Satsuma Studio -->
-                    <script src="https://elfsightcdn.com/platform.js" async></script>
-                    <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe" data-elfsight-app-lazy></div>
+                    <script src="https://elfsightcdn.com/platform.js" defer></script>
+                    <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe"></div>
                 </div>
             </div>
         </section>
