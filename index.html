@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Satsuma Studio | Digital Design Agency London</title>
+    <meta name="description" content="Satsuma Studio is a deliberate & dynamic digital creative agency based in London. We specialize in strategy, branding, UI/UX design, and web technology.">
+    <meta name="keywords" content="Digital Design Agency, Web Design London, UI/UX Design, Branding Strategy, Creative Agency UK, Satsuma Studio">
+    <meta name="author" content="Satsuma Studio">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.satsuma.studio/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Satsuma Studio | Digital Design">
+    <meta property="og:description" content="A deliberate & dynamic full service digital creative agency based in London.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.satsuma.studio/">
+    <meta property="og:site_name" content="Satsuma Studio">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:image" content="https://www.satsuma.studio/assets/share-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630"> 
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.satsuma.studio/assets/share-image.svg">
+    <meta name="theme-color" content="#FF5A00">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "DesignAgency",
+      "name": "Satsuma Studio",
+      "url": "https://www.satsuma.studio",
+      "logo": "https://www.satsuma.studio/assets/logo.svg",
+      "description": "A deliberate & dynamic full service digital creative agency specializing in strategy, design, and technology.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressCountry": "UK"
+      },
+      "sameAs": [
+        "https://www.instagram.com/sat_sumastudio",
+        "https://uk.linkedin.com/company/studiosatsuma"
+      ],
+      "knowsAbout": ["Web Design", "Branding", "UI/UX", "Digital Strategy", "Development"],
+      "priceRange": "$$$"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'satsuma': '#FF5A00',
+                        'ink': '#121212',
+                        'paper': '#FFFFFF',
+                        'fog': '#FAFAFA'
+                    },
+                    fontFamily: {
+                        'mono': ['"Space Mono"', 'monospace'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'fluid-h1': 'clamp(2.5rem, 8vw, 6rem)',
+                        'fluid-p': 'clamp(0.875rem, 1.5vw, 1.125rem)',
+                        'mobile-menu': 'clamp(2rem, 5vw, 3rem)',
+                    },
+                    transitionTimingFunction: {
+                        'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: #121212;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #FF5A00;
+            color: white;
+        }
+
+        /* Animations */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 150%, 0% 150%);
+            transition: clip-path 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform, clip-path;
+            padding-bottom: 2px;
+        }
+        
+        .is-hidden {
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+            transform: translateY(20px);
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Logo Physics V3 */
+        .logo-text {
+            display: inline-block;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: left center;
+            opacity: 1;
+            transform: translateY(-50%) scale(1) translateX(0);
+            filter: blur(0);
+            letter-spacing: normal;
+        }
+        
+        .group:hover .logo-text {
+            transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            opacity: 0;
+            transform: translateY(-50%) scale(0.8) translateX(15px);
+            letter-spacing: -0.1em;
+            filter: blur(6px);
+        }
+
+        @keyframes bounce-wild {
+            0% { transform: translateY(10px) scale(0); opacity: 0; }
+            40% { transform: translateY(-6px) scale(1.3); opacity: 1; }
+            60% { transform: translateY(3px) scale(0.9); }
+            80% { transform: translateY(-1px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes bounce-heavy {
+            0% { transform: translateY(-15px) scale(0); opacity: 0; }
+            50% { transform: translateY(0) scale(1.4, 0.6); opacity: 1; } 
+            75% { transform: translateY(-2px) scale(0.95, 1.05); } 
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes bounce-quick {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .logo-dot {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s ease-out; 
+        }
+
+        .group:hover .logo-dot:nth-child(1) { animation: bounce-heavy 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.05s; }
+        .group:hover .logo-dot:nth-child(2) { animation: bounce-wild 0.8s ease-out forwards; animation-delay: 0.15s; }
+        .group:hover .logo-dot:nth-child(3) { animation: bounce-quick 0.5s ease-out forwards; animation-delay: 0.0s; } 
+        .group:hover .logo-dot:nth-child(4) { animation: bounce-wild 0.9s ease-in-out forwards; animation-delay: 0.2s; }
+        .group:hover .logo-dot:nth-child(5) { animation: bounce-heavy 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.1s; }
+        .group:hover .logo-dot:nth-child(6) { animation: bounce-quick 0.6s ease-out forwards; animation-delay: 0.25s; }
+        .group:hover .logo-dot:nth-child(7) { animation: bounce-wild 0.7s ease-out forwards; animation-delay: 0.08s; }
+
+        .satsuma-orb {
+            width: 60px;
+            height: 60px;
+            background-color: #FF5A00;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.15); 
+            will-change: transform; 
+            transform: translateZ(0); 
+            pointer-events: none;
+        }
+
+        #organism-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            filter: blur(30px); 
+        }
+
+        #capabilities {
+            position: relative;
+        }
+        
+        #capabilities.active-organism #organism-canvas,
+        #capabilities:hover #organism-canvas {
+            opacity: 1;
+        }
+
+        .discipline-item {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="font-mono antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full px-6 py-6 md:p-10 flex justify-between items-center md:items-start z-[9999] bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-transparent" id="navbar">
+        
+        <!-- Logo -->
+        <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="group relative z-[10000] flex items-center h-6 w-32 cursor-pointer" aria-label="Satsuma Studio - Back to Top">
+            <span class="logo-text text-satsuma font-sans font-semibold text-xl tracking-tight absolute left-0 top-1/2">
+                Satsuma
+            </span>
+            <div class="absolute inset-0 flex items-center justify-start gap-[6px] pl-0.5 pointer-events-none" aria-hidden="true">
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+                <span class="logo-dot w-1.5 h-1.5 bg-satsuma rounded-full"></span>
+            </div>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-12 text-xs font-bold tracking-widest uppercase text-ink pt-2">
+             <a href="#capabilities" class="hover:text-satsuma transition-colors relative group block nav-link">
+                Capabilities
+                <span class="absolute -bottom-1 left-0 w-0 h-px bg-satsuma transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#work" class="hover:text-satsuma transition-colors relative group block nav-link">
+                Works
+                <span class="absolute -bottom-1 left-0 w-0 h-px bg-satsuma transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#contact" class="hover:text-satsuma transition-colors relative group block nav-link">
+                Contact
+                 <span class="absolute -bottom-1 left-0 w-0 h-px bg-satsuma transition-all group-hover:w-full"></span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu (Inline) -->
+        <!-- Added z-index and increased vertical padding (py-4) for larger touch targets -->
+        <div class="flex md:hidden gap-4 text-[10px] font-bold tracking-widest uppercase text-ink items-center z-[10000]">
+            <a href="#capabilities" class="nav-link hover:text-satsuma transition-colors py-4 px-2">Capabilities</a>
+            <a href="#work" class="nav-link hover:text-satsuma transition-colors py-4 px-2">Works</a>
+            <a href="#contact" class="nav-link hover:text-satsuma transition-colors py-4 px-2">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+        <section id="hero" class="min-h-[85vh] flex flex-col items-center justify-center relative px-6 pt-32 overflow-hidden z-10">
+            <div class="satsuma-orb mb-8 md:mb-12" id="hero-orb"></div>
+            
+            <div class="max-w-3xl text-center z-10">
+                <h1 class="font-sans font-light text-fluid-h1 text-ink leading-[1.1] mb-6 md:mb-8 reveal-wrapper">
+                    <span class="reveal-text is-hidden block">Deliberate & Dynamic</span>
+                    <span class="reveal-text is-hidden block" style="transition-delay: 100ms;">Design.</span>
+                </h1>
+                
+                <p class="font-mono text-[10px] md:text-sm text-ink/60 max-w-lg mx-auto leading-relaxed reveal-wrapper uppercase tracking-widest">
+                    <span class="reveal-text is-hidden block" style="transition-delay: 200ms;">
+                        Digital Focus • Strategy • Technology
+                    </span>
+                </p>
+            </div>
+        </section>
+
+        <section id="capabilities" class="py-16 md:py-24 px-6 md:px-12 bg-white overflow-hidden relative z-10">
+            <canvas id="organism-canvas"></canvas>
+
+            <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 relative z-10">
+                <div class="md:col-span-4 fade-in-up pointer-events-none">
+                    <span class="text-satsuma text-xs font-bold uppercase tracking-widest block mb-6">Discipline</span>
+                    <h2 class="text-3xl md:text-5xl font-sans font-light leading-tight text-ink">
+                        We build brands<br>& digital systems.
+                    </h2>
+                </div>
+                
+                <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16 mt-8 md:mt-0">
+                    <!-- Service 1 -->
+                    <div class="discipline-item group fade-in-up" data-mood="strategy">
+                        <div class="w-full h-px bg-ink/10 mb-6 group-hover:bg-satsuma transition-colors duration-500"></div>
+                        <h3 class="text-lg font-sans font-medium mb-3">Strategy & Brand</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 font-sans">Defining the core truth of a business and translating it into a visual language that speaks clearly.</p>
+                        <ul class="text-[10px] uppercase tracking-widest text-ink/40 space-y-2">
+                            <li>Positioning</li>
+                            <li>Visual Identity</li>
+                            <li>Art Direction</li>
+                        </ul>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="discipline-item group fade-in-up" style="transition-delay: 100ms;" data-mood="product">
+                        <div class="w-full h-px bg-ink/10 mb-6 group-hover:bg-satsuma transition-colors duration-500"></div>
+                        <h3 class="text-lg font-sans font-medium mb-3">Digital Product</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 font-sans">Designing intuitive interfaces and user experiences that remove friction and add delight.</p>
+                        <ul class="text-[10px] uppercase tracking-widest text-ink/40 space-y-2">
+                            <li>UI/UX Design</li>
+                            <li>Prototyping</li>
+                            <li>Design Systems</li>
+                        </ul>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="discipline-item group fade-in-up" style="transition-delay: 200ms;" data-mood="development">
+                        <div class="w-full h-px bg-ink/10 mb-6 group-hover:bg-satsuma transition-colors duration-500"></div>
+                        <h3 class="text-lg font-sans font-medium mb-3">Development</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 font-sans">Robust, scalable code. We prioritize performance, accessibility, and smooth motion.</p>
+                        <ul class="text-[10px] uppercase tracking-widest text-ink/40 space-y-2">
+                            <li>Webflow / React</li>
+                            <li>eCommerce</li>
+                            <li>Creative Coding</li>
+                        </ul>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="discipline-item group fade-in-up" style="transition-delay: 300ms;" data-mood="content">
+                        <div class="w-full h-px bg-ink/10 mb-6 group-hover:bg-satsuma transition-colors duration-500"></div>
+                        <h3 class="text-lg font-sans font-medium mb-3">Content</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 font-sans">Visual and verbal storytelling that gives a brand its voice and keeps audiences engaged.</p>
+                        <ul class="text-[10px] uppercase tracking-widest text-ink/40 space-y-2">
+                            <li>Copywriting</li>
+                            <li>Motion Design</li>
+                            <li>3D & Photography</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="py-16 md:py-24 px-6 md:px-12 bg-white relative z-10">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex justify-between items-end mb-12 md:mb-16 border-b border-ink/10 pb-4 fade-in-up">
+                    <h2 class="text-satsuma text-xs font-bold uppercase tracking-widest">Works</h2>
+                    <span class="text-xs text-ink/40 font-mono hidden md:block">2023 — 2026</span>
+                </div>
+                <div class="fade-in-up min-h-[800px] w-full">
+                    <script src="https://elfsightcdn.com/platform.js" async></script>
+                    <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe" data-elfsight-app-lazy></div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-white text-ink py-16 md:py-24 px-6 md:px-12 relative z-10 border-t border-satsuma/30">
+            <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 pt-12">
+                <div class="max-w-md">
+                    <span class="text-satsuma text-xs font-bold uppercase tracking-widest block mb-6">Contact</span>
+                    <!-- FIX: Changed hover:text-satsuma to active:text-satsuma md:hover:text-satsuma -->
+                    <!-- This prevents the "double tap" issue on mobile by only enabling hover on desktop screens -->
+                    <a href="mailto:hello@satsuma.studio" class="font-sans text-[clamp(1.2rem,5vw,3rem)] font-light active:text-satsuma md:hover:text-satsuma transition-colors whitespace-nowrap">
+                        hello@satsuma.studio
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-8 md:text-right mt-8 md:mt-0">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-[10px] uppercase tracking-widest text-ink/40 mb-2">Social</span>
+                        <!-- FIX: Applied the same mobile touch optimization to social links -->
+                        <a href="https://www.instagram.com/sat_sumastudio" target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider active:text-satsuma md:hover:text-satsuma transition-colors">Instagram</a>
+                        <a href="https://uk.linkedin.com/company/studiosatsuma" target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider active:text-satsuma md:hover:text-satsuma transition-colors">LinkedIn</a>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <span class="text-[10px] uppercase tracking-widest text-ink/40">© Satsuma Studio</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        /**
+         * 1. REVEAL ANIMATIONS
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal-text');
+            setTimeout(() => {
+                reveals.forEach(el => el.classList.remove('is-hidden'));
+            }, 300);
+        });
+
+        // RE-ADDED JS SCROLL ENGINE: Guarantees links work even on mobile with overflow-hidden quirks
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Manual offset calculation for fixed header
+                    const headerOffset = 80; 
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Hero Orb
+        const orb = document.getElementById('hero-orb');
+        const heroSection = document.getElementById('hero');
+        let mouseX = 0, mouseY = 0;
+        let orbX = 0, orbY = 0;
+        let isHeroVisible = true;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+            mouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+        });
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            isHeroVisible = entries[0].isIntersecting;
+            if (isHeroVisible) animateOrb();
+        }, { threshold: 0 });
+        
+        heroObserver.observe(heroSection);
+
+        function animateOrb() {
+            if (!isHeroVisible) return;
+            const targetX = mouseX * 15;
+            const targetY = mouseY * 15;
+            orbX += (targetX - orbX) * 0.1;
+            orbY += (targetY - orbY) * 0.1;
+            orb.style.transform = `translate3d(${orbX}px, ${orbY}px, 0)`;
+            requestAnimationFrame(animateOrb);
+        }
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            animateOrb();
+        }
+
+        // Organism
+        const canvas = document.getElementById('organism-canvas');
+        const capabilitiesSection = document.getElementById('capabilities');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let isCanvasVisible = false;
+        let pageMouseX = 0, pageMouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            const rect = capabilitiesSection.getBoundingClientRect();
+            pageMouseX = e.clientX - rect.left;
+            pageMouseY = e.clientY - rect.top;
+        });
+
+        const blob = { x: 0, y: 0, radius: 80, points: [], numPoints: 8, noiseOffset: 0, speed: 0.01, turbulence: 5, targetRadius: 80, targetSpeed: 0.01, targetTurbulence: 5 };
+
+        for(let i = 0; i < blob.numPoints; i++) {
+            blob.points.push({ angle: (Math.PI * 2 / blob.numPoints) * i, noise: Math.random() });
+        }
+
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(resizeCanvas, 100);
+        });
+        resizeCanvas();
+
+        function noise(x) { return Math.sin(x) * 0.5 + Math.sin(x * 2.3) * 0.3 + Math.sin(x * 4.7) * 0.2; }
+
+        const canvasObserver = new IntersectionObserver((entries) => {
+            isCanvasVisible = entries[0].isIntersecting;
+            if (isCanvasVisible) {
+                capabilitiesSection.classList.add('active-organism');
+                animateOrganism();
+            } else {
+                capabilitiesSection.classList.remove('active-organism');
+            }
+        }, { threshold: 0.1 });
+
+        canvasObserver.observe(capabilitiesSection);
+
+        function animateOrganism() {
+            if (!isCanvasVisible) return;
+            ctx.clearRect(0, 0, width, height);
+            blob.x += (pageMouseX - blob.x) * 0.08;
+            blob.y += (pageMouseY - blob.y) * 0.08;
+            blob.radius += (blob.targetRadius - blob.radius) * 0.05;
+            blob.speed += (blob.targetSpeed - blob.speed) * 0.05;
+            blob.turbulence += (blob.targetTurbulence - blob.turbulence) * 0.05;
+            blob.noiseOffset += blob.speed;
+            ctx.beginPath();
+            for (let i = 0; i <= blob.numPoints; i++) {
+                const point = blob.points[i % blob.numPoints];
+                const nextPoint = blob.points[(i + 1) % blob.numPoints];
+                const r = blob.radius + noise(point.angle + blob.noiseOffset + i) * blob.turbulence;
+                const nextR = blob.radius + noise(nextPoint.angle + blob.noiseOffset + (i+1)) * blob.turbulence;
+                const x = blob.x + Math.cos(point.angle) * r;
+                const y = blob.y + Math.sin(point.angle) * r;
+                const nextX = blob.x + Math.cos(nextPoint.angle) * nextR;
+                const nextY = blob.y + Math.sin(nextPoint.angle) * nextR;
+                if (i === 0) { ctx.moveTo((x + nextX) / 2, (y + nextY) / 2); } 
+                else { const midX = (x + nextX) / 2; const midY = (y + nextY) / 2; ctx.quadraticCurveTo(x, y, midX, midY); }
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(255, 90, 0, 0.06)'; 
+            ctx.fill();
+            requestAnimationFrame(animateOrganism);
+        }
+
+        const items = document.querySelectorAll('.discipline-item');
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => { setMood(item.getAttribute('data-mood')); });
+            item.addEventListener('mouseleave', () => { setMood('default'); });
+        });
+
+        const mobileObserver = new IntersectionObserver((entries) => {
+            if (window.matchMedia("(pointer: coarse)").matches) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setMood(entry.target.getAttribute('data-mood'));
+                        const rect = entry.target.getBoundingClientRect();
+                        const capRect = capabilitiesSection.getBoundingClientRect();
+                        pageMouseX = (rect.left + rect.width/2) - capRect.left;
+                        pageMouseY = (rect.top + rect.height/2) - capRect.top;
+                    }
+                });
+            }
+        }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+        items.forEach(el => mobileObserver.observe(el));
+
+        function setMood(mood) {
+            switch(mood) {
+                case 'strategy': blob.targetRadius = 100; blob.targetSpeed = 0.005; blob.targetTurbulence = 5; break;
+                case 'product': blob.targetRadius = 80; blob.targetSpeed = 0.02; blob.targetTurbulence = 3; break;
+                case 'development': blob.targetRadius = 60; blob.targetSpeed = 0.08; blob.targetTurbulence = 2; break;
+                case 'content': blob.targetRadius = 90; blob.targetSpeed = 0.03; blob.targetTurbulence = 12; break;
+                default: blob.targetRadius = 70; blob.targetSpeed = 0.01; blob.targetTurbulence = 5;
+            }
+        }
+    </script>
+</body>
+</html>

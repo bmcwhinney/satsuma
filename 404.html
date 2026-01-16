@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Satsuma Studio</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23FF5A00%22/></svg>" type="image/svg+xml">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --satsuma: #FF5A00;
+            --ink: #121212;
+            --paper: #FFFFFF;
+        }
+        
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: var(--paper);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .orb {
+            width: 80px;
+            height: 80px;
+            background-color: var(--satsuma);
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 90, 0, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(18, 18, 18, 0.5);
+            margin-bottom: 2rem;
+        }
+        
+        a {
+            display: inline-block;
+            color: var(--satsuma);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border: 1px solid var(--satsuma);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            background-color: var(--satsuma);
+            color: var(--paper);
+        }
+        
+        ::selection {
+            background: var(--satsuma);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="orb"></div>
+    <h1>404</h1>
+    <p>This page doesn't exist</p>
+    <a href="/">Return Home</a>
+</body>
+</html>

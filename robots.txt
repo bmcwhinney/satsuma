@@ -1,0 +1,8 @@
+# Robots.txt for Satsuma Studio
+# https://www.satsuma.studio
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.satsuma.studio/sitemap.xml
