@@ -300,6 +300,32 @@
                 letter-spacing: 0.05em !important;
             }
         }
+
+        /* iPad portrait optimization (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .hero-heading {
+                font-size: clamp(2.5rem, 7vw, 4rem) !important;
+            }
+        }
+
+        /* Ultra-wide screen optimization (1920px+) */
+        @media (min-width: 1920px) {
+            .hero-heading {
+                font-size: 5.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 0.875rem !important;
+                letter-spacing: 0.25em !important;
+            }
+        }
+
+        /* 4K screens (2560px+) */
+        @media (min-width: 2560px) {
+            .section-padding {
+                padding-left: 5rem !important;
+                padding-right: 5rem !important;
+            }
+        }
     </style>
 </head>
 <body class="font-mono antialiased">
@@ -354,8 +380,8 @@
         <section id="hero" class="min-h-[85vh] flex flex-col items-center justify-center relative px-4 sm:px-6 pt-32 overflow-hidden z-10 section-padding">
             <div class="satsuma-orb mb-8 md:mb-12" id="hero-orb"></div>
             
-            <div class="max-w-3xl text-center z-10 px-2">
-                <h1 class="font-sans font-light text-[clamp(1.5rem,9vw,6rem)] text-ink leading-[1.1] mb-6 md:mb-8 reveal-wrapper hero-heading">
+            <div class="max-w-4xl text-center z-10 px-2">
+                <h1 class="font-sans font-light text-[clamp(1.5rem,9vw,5.5rem)] text-ink leading-[1.1] mb-6 md:mb-8 reveal-wrapper hero-heading">
                     <span class="reveal-text is-hidden block">Deliberate &</span>
                     <span class="reveal-text is-hidden block" style="transition-delay: 50ms;">Dynamic</span>
                     <span class="reveal-text is-hidden block" style="transition-delay: 100ms;">Design.</span>
