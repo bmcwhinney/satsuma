@@ -269,15 +269,34 @@
         }
 
         /* Hero text responsive fixes */
+        .hero-heading {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        
+        @media (max-width: 500px) {
+            .hero-heading {
+                font-size: clamp(1.75rem, 12vw, 3rem) !important;
+            }
+        }
+        
         @media (max-width: 400px) {
             .hero-heading {
                 font-size: clamp(1.5rem, 11vw, 2.5rem) !important;
-                word-break: break-word;
-                hyphens: auto;
             }
             .hero-subtitle {
                 font-size: 8px !important;
                 letter-spacing: 0.1em !important;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .hero-heading {
+                font-size: clamp(1.25rem, 10vw, 2rem) !important;
+            }
+            .hero-subtitle {
+                font-size: 7px !important;
+                letter-spacing: 0.05em !important;
             }
         }
     </style>
