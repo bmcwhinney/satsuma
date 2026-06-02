@@ -326,6 +326,23 @@
                 padding-right: 5rem !important;
             }
         }
+
+        /* Hide Elfsight free portfolio branding badge */
+        .portfolio-widget-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-widget-wrap .elfsight-badge-cover {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: #fff;
+            z-index: 99999;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="font-mono antialiased">
@@ -464,8 +481,11 @@
                     <span class="text-xs text-ink/40 font-mono hidden md:block">2023 — 2026</span>
                 </div>
                 <div class="fade-in-up min-h-[400px] md:min-h-[800px] w-full">
-                    <!-- Elfsight Portfolio | Satsuma Studio -->
-                    <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe"></div>
+                    <div class="portfolio-widget-wrap">
+                        <!-- Elfsight Portfolio | Satsuma Studio -->
+                        <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe"></div>
+                        <div class="elfsight-badge-cover" aria-hidden="true"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -693,6 +713,23 @@
                 default: blob.targetRadius = 70; blob.targetSpeed = 0.01; blob.targetTurbulence = 5;
             }
         }
+
+        (function hideElfsightBadge() {
+            const wrap = document.querySelector('.portfolio-widget-wrap');
+            if (!wrap) return;
+
+            function suppressBadge() {
+                wrap.querySelectorAll('a[href*="elfsight.com"]').forEach(link => link.remove());
+            }
+
+            suppressBadge();
+            new MutationObserver(suppressBadge).observe(wrap, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style', 'href']
+            });
+        })();
     </script>
 </body>
 </html>
