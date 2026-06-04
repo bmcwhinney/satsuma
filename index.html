@@ -51,24 +51,9 @@
     }
     </script>
     
-    <!-- DNS Prefetch for faster mobile loading -->
-    <link rel="dns-prefetch" href="https://elfsightcdn.com">
-    <link rel="dns-prefetch" href="https://static.elfsight.com">
-    <link rel="dns-prefetch" href="https://core.service.elfsight.com">
-    <link rel="dns-prefetch" href="https://apps.elfsight.com">
-    
     <!-- Preconnect to external services -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://elfsightcdn.com" crossorigin>
-    <link rel="preconnect" href="https://static.elfsight.com" crossorigin>
-    <link rel="preconnect" href="https://core.service.elfsight.com" crossorigin>
-    
-    <!-- Preload Elfsight for faster portfolio loading -->
-    <link rel="preload" href="https://elfsightcdn.com/platform.js" as="script" fetchpriority="high">
-    
-    <!-- Load Elfsight early for mobile performance -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -327,9 +312,151 @@
             }
         }
 
-        /* Hide Elfsight free portfolio branding badge */
-        .portfolio-widget-wrap {
+        /* Portfolio grid (Elfsight-style hover overlay) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                gap: 0.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        .portfolio-item {
             position: relative;
+            display: block;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background-color: #121212;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .portfolio-item__media {
+            position: absolute;
+            inset: 0;
+        }
+
+        .portfolio-item__media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform;
+        }
+
+        .portfolio-item__overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.65);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .portfolio-item__icon-wrap {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .portfolio-item__icon {
+            display: block;
+            width: 1.125rem;
+            height: 1.125rem;
+            color: #fff;
+        }
+
+        .portfolio-item__text {
+            text-align: center;
+            color: #fff;
+            transform: translateY(8px);
+            transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .portfolio-item__title {
+            display: block;
+            font-family: Inter, sans-serif;
+            font-size: clamp(0.7rem, 2.8vw, 0.95rem);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            line-height: 1.35;
+        }
+
+        .portfolio-item__category {
+            display: block;
+            margin-top: 0.35rem;
+            font-family: Inter, sans-serif;
+            font-size: clamp(0.6rem, 2.2vw, 0.75rem);
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .portfolio-item:hover .portfolio-item__media img,
+            .portfolio-item:focus-visible .portfolio-item__media img {
+                transform: scale(1.05);
+            }
+
+            .portfolio-item:hover .portfolio-item__overlay,
+            .portfolio-item:focus-visible .portfolio-item__overlay {
+                opacity: 1;
+            }
+
+            .portfolio-item:hover .portfolio-item__icon-wrap,
+            .portfolio-item:focus-visible .portfolio-item__icon-wrap {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .portfolio-item:hover .portfolio-item__text,
+            .portfolio-item:focus-visible .portfolio-item__text {
+                transform: translateY(0);
+            }
+        }
+
+        .portfolio-item.is-active .portfolio-item__media img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item.is-active .portfolio-item__overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item.is-active .portfolio-item__icon-wrap {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-item.is-active .portfolio-item__text {
+            transform: translateY(0);
+        }
+
+        .portfolio-item:focus-visible {
+            outline: 2px solid #FF5A00;
+            outline-offset: 2px;
         }
     </style>
 </head>
@@ -468,12 +595,7 @@
                     <h2 class="text-satsuma text-xs font-bold uppercase tracking-widest">Works</h2>
                     <span class="text-xs text-ink/40 font-mono hidden md:block">2023 — 2026</span>
                 </div>
-                <div class="fade-in-up min-h-[400px] md:min-h-[800px] w-full">
-                    <div class="portfolio-widget-wrap">
-                        <!-- Elfsight Portfolio | Satsuma Studio -->
-                        <div class="elfsight-app-5a621399-d5e7-4a59-a65e-ae9c8db3babe"></div>
-                    </div>
-                </div>
+                <div class="fade-in-up w-full" id="portfolio-grid" role="list" aria-label="Selected works"></div>
             </div>
         </section>
 
@@ -701,22 +823,101 @@
             }
         }
 
-        (function hideElfsightBadge() {
-            const wrap = document.querySelector('.portfolio-widget-wrap');
-            if (!wrap) return;
-
-            function suppressBadge() {
-                wrap.querySelectorAll('a[href*="elfsight.com"]').forEach(link => link.remove());
+        /**
+         * 2. PORTFOLIO GRID
+         */
+        const portfolioProjects = [
+            {
+                title: 'Sips Berlin',
+                category: 'E-Commerce',
+                image: '/assets/portfolio/sips.png',
+                alt: 'Sips Berlin e-commerce website on mobile',
+                url: '',
+                instagram: 'https://www.instagram.com/sat_sumastudio'
+            },
+            {
+                title: 'Forah Pay',
+                category: 'Branding',
+                image: '/assets/portfolio/forah-pay.png',
+                alt: 'Forah Pay brand and product photography',
+                url: '',
+                instagram: 'https://www.instagram.com/sat_sumastudio'
+            },
+            {
+                title: 'Lia',
+                category: 'Web Design',
+                image: '/assets/portfolio/lia.png',
+                alt: 'Lia restaurant website design',
+                url: '',
+                instagram: 'https://www.instagram.com/sat_sumastudio'
+            },
+            {
+                title: 'Aroma',
+                category: 'Branding',
+                image: '/assets/portfolio/aroma.png',
+                alt: 'Aroma brand visual identity',
+                url: '',
+                instagram: 'https://www.instagram.com/sat_sumastudio'
+            },
+            {
+                title: 'St Vincent Geothermal',
+                category: 'Web Design',
+                image: '/assets/portfolio/geotherma.png',
+                alt: 'Geotherma geothermal energy project website',
+                url: '',
+                instagram: 'https://www.instagram.com/sat_sumastudio'
             }
+        ];
 
-            suppressBadge();
-            new MutationObserver(suppressBadge).observe(wrap, {
-                childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['style', 'href']
-            });
-        })();
+        const instagramIcon = '<svg class="portfolio-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>';
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            if (!grid) return;
+
+            grid.className = 'portfolio-grid fade-in-up';
+            grid.innerHTML = portfolioProjects.map((project) => {
+                const tag = project.url ? 'a' : 'article';
+                const hrefAttr = project.url ? ` href="${project.url}" target="_blank" rel="noopener noreferrer"` : '';
+                const focusAttr = project.url ? '' : ' tabindex="0"';
+
+                return `
+                    <${tag} class="portfolio-item" role="listitem"${hrefAttr}${focusAttr}>
+                        <div class="portfolio-item__media">
+                            <img src="${project.image}" alt="${project.alt}" loading="lazy" decoding="async" width="800" height="800">
+                        </div>
+                        <div class="portfolio-item__overlay" aria-hidden="true">
+                            ${project.instagram ? `<span class="portfolio-item__icon-wrap">${instagramIcon}</span>` : ''}
+                            <div class="portfolio-item__text">
+                                <span class="portfolio-item__title">${project.title}</span>
+                                <span class="portfolio-item__category">${project.category}</span>
+                            </div>
+                        </div>
+                    </${tag}>
+                `;
+            }).join('');
+
+            observer.observe(grid);
+
+            const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            if (coarsePointer) {
+                grid.querySelectorAll('.portfolio-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const isActive = item.classList.contains('is-active');
+                        grid.querySelectorAll('.portfolio-item.is-active').forEach(el => el.classList.remove('is-active'));
+                        if (!isActive) item.classList.add('is-active');
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.portfolio-item')) {
+                        grid.querySelectorAll('.portfolio-item.is-active').forEach(el => el.classList.remove('is-active'));
+                    }
+                });
+            }
+        }
+
+        renderPortfolio();
     </script>
 </body>
 </html>
