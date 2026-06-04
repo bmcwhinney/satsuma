@@ -51,6 +51,12 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "*.gif"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "image/gif"
+
+[[headers]]
   for = "*.svg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
