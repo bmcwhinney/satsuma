@@ -346,13 +346,32 @@
             inset: 0;
         }
 
-        .portfolio-item__media img {
+        .portfolio-item__media img,
+        .portfolio-item__media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transform: scale(1);
             transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
             will-change: transform;
+        }
+
+        .portfolio-item__poster {
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-item__video {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item__video.is-playing {
+            opacity: 1;
+            z-index: 2;
         }
 
         .portfolio-item__overlay {
@@ -400,7 +419,9 @@
 
         @media (hover: hover) and (pointer: fine) {
             .portfolio-item:hover .portfolio-item__media img,
-            .portfolio-item:focus-visible .portfolio-item__media img {
+            .portfolio-item:hover .portfolio-item__media video,
+            .portfolio-item:focus-visible .portfolio-item__media img,
+            .portfolio-item:focus-visible .portfolio-item__media video {
                 transform: scale(1.05);
             }
 
@@ -415,7 +436,8 @@
             }
         }
 
-        .portfolio-item.is-active .portfolio-item__media img {
+        .portfolio-item.is-active .portfolio-item__media img,
+        .portfolio-item.is-active .portfolio-item__media video {
             transform: scale(1.05);
         }
 
@@ -802,40 +824,85 @@
         const portfolioProjects = [
             {
                 title: 'Aroma',
-                category: 'Branding',
-                image: '/assets/portfolio/aroma.gif',
+                category: 'Branding & Visual Identity',
+                poster: '/assets/portfolio/aroma-poster.jpg',
+                video: '/assets/portfolio/aroma.mp4',
                 alt: 'Aroma brand visual identity',
                 url: ''
             },
             {
                 title: 'Sips Berlin',
-                category: 'E-Commerce',
-                image: '/assets/portfolio/sips.gif',
+                category: 'E-Commerce Development',
+                poster: '/assets/portfolio/sips-poster.jpg',
+                video: '/assets/portfolio/sips.mp4',
                 alt: 'Sips Berlin e-commerce website on mobile',
                 url: ''
             },
             {
                 title: 'Forah Pay',
-                category: 'Branding',
-                image: '/assets/portfolio/forah-pay.jpg',
+                category: 'Branding & Visual Identity',
+                poster: '/assets/portfolio/forah-pay-opt.jpg',
                 alt: 'Forah Pay brand and product photography',
                 url: ''
             },
             {
                 title: 'Lia',
-                category: 'Web Design',
-                image: '/assets/portfolio/lia.gif',
+                category: 'Web Design & Development',
+                poster: '/assets/portfolio/lia-poster.jpg',
+                video: '/assets/portfolio/lia.mp4',
                 alt: 'Lia restaurant website design',
                 url: ''
             }
         ];
+
+        const portfolioUseVideo = window.matchMedia(
+            '(min-width: 768px) and (hover: hover) and (prefers-reduced-motion: no-preference)'
+        ).matches;
+
+        function portfolioMediaHtml(project, eager) {
+            const loading = eager ? 'eager' : 'lazy';
+            const fetchpriority = eager ? ' fetchpriority="high"' : '';
+
+            if (project.video && portfolioUseVideo) {
+                return `
+                    <img class="portfolio-item__poster" src="${project.poster}" alt="${project.alt}" loading="${loading}" decoding="async" width="640" height="640"${fetchpriority}>
+                    <video class="portfolio-item__video" muted loop playsinline preload="none" poster="${project.poster}" data-src="${project.video}" aria-hidden="true"></video>
+                `;
+            }
+
+            return `<img src="${project.poster}" alt="${project.alt}" loading="${loading}" decoding="async" width="640" height="640"${fetchpriority}>`;
+        }
+
+        function initPortfolioVideos(grid) {
+            if (!portfolioUseVideo) return;
+
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        if (!video.src && video.dataset.src) {
+                            video.src = video.dataset.src;
+                            video.load();
+                        }
+                        video.play()
+                            .then(() => video.classList.add('is-playing'))
+                            .catch(() => {});
+                    } else {
+                        video.pause();
+                        video.classList.remove('is-playing');
+                    }
+                });
+            }, { rootMargin: '80px', threshold: 0.2 });
+
+            grid.querySelectorAll('.portfolio-item__video').forEach((video) => videoObserver.observe(video));
+        }
 
         function renderPortfolio() {
             const grid = document.getElementById('portfolio-grid');
             if (!grid) return;
 
             grid.className = 'portfolio-grid fade-in-up';
-            grid.innerHTML = portfolioProjects.map((project) => {
+            grid.innerHTML = portfolioProjects.map((project, index) => {
                 const tag = project.url ? 'a' : 'article';
                 const hrefAttr = project.url ? ` href="${project.url}" target="_blank" rel="noopener noreferrer"` : '';
                 const focusAttr = project.url ? '' : ' tabindex="0"';
@@ -843,7 +910,7 @@
                 return `
                     <${tag} class="portfolio-item" role="listitem"${hrefAttr}${focusAttr}>
                         <div class="portfolio-item__media">
-                            <img src="${project.image}" alt="${project.alt}" loading="lazy" decoding="async" width="800" height="800">
+                            ${portfolioMediaHtml(project, index === 0)}
                         </div>
                         <div class="portfolio-item__overlay" aria-hidden="true">
                             <div class="portfolio-item__text">
@@ -856,6 +923,7 @@
             }).join('');
 
             observer.observe(grid);
+            initPortfolioVideos(grid);
 
             const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
             if (coarsePointer) {
